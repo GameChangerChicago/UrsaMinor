@@ -14,12 +14,12 @@ sysinfo.txt
 [Ee]xported[Oo]bj/
 .vs/
 /*.userprefs
-/*.csproj
+*.csproj
 /*.pidb
 /*.suo
-/*.sln*
+*.sln*
 /*.user
-/*.unityproj
+*.unityproj
 /*.booproj
  
 # ============ #
