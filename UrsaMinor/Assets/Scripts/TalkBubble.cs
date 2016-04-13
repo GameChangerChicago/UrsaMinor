@@ -3,18 +3,20 @@ using System.Collections;
 
 public class TalkBubble : MonoBehaviour
 {
-    public float Duration;
+    public float Duration = -1;
     private SpriteRenderer _mySpriteRenderer;
     private bool _startFade;
 
     void Start()
     {
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
-        Invoke("IntiateFade", Duration);
     }
 
     void Update()
     {
+        if(!_startFade && Duration != -1)
+            Invoke("IntiateFade", Duration);
+
         if (_startFade)
             FadeOut();
     }

@@ -23,6 +23,10 @@ public class UrsaController : BearController
         {
             jumped = false;
         }
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            Call(3, TalkBubbleTypes.ANGRY);
+        }
 
         if(Input.GetKey(KeyCode.LeftArrow))
         {

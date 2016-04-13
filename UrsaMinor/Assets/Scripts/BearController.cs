@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BearController : MovementController
 {
+    public GameObject TalkBubblePoint;
     public float FullJumpSpeed,
                  JumpVelocity;
     protected bool jumped;
@@ -23,13 +24,9 @@ public class BearController : MovementController
     }
     private bool _isGrounded;
 
-    private GameObject _genericTalkBubble;
-
     protected override void Start()
     {
         base.Start();
-
-        _genericTalkBubble = Resources.Load<GameObject>("/Prefabs/GenericTalkBubble");
     }
 
     protected override void Update()
@@ -56,10 +53,25 @@ public class BearController : MovementController
         }
     }
 
-    protected virtual void Call(float duration)
+    public virtual void Call(float duration, TalkBubbleTypes currentType)
     {
-        GameObject genericTalkBubble = Instantiate(_genericTalkBubble);
-        TalkBubble talkBubble = genericTalkBubble.GetComponent<TalkBubble>();
+        GameObject talkBubbleObject = new GameObject();
+        switch (currentType)
+        {
+            case TalkBubbleTypes.ANGRY:
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/AngryTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                break;
+            case TalkBubbleTypes.LEFTARROW:
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/LeftArrowTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                break;
+            case TalkBubbleTypes.RIGHTARROW:
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/RightArrowTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                break;
+            default:
+                Debug.LogWarning("That talk bubble type either doesn't exist or hasn't been set up yet.");
+                break;
+        }
+        TalkBubble talkBubble = talkBubbleObject.GetComponent<TalkBubble>();
         talkBubble.Duration = duration;
     }
 }

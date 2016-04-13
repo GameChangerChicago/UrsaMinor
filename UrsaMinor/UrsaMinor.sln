@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{EC5BFE81-9B64-957B-8D36-BD8D0BFAC1D7}") = "UrsaMinor", "Assembly-CSharp-firstpass.csproj", "{81E69B99-E744-8E54-CA7E-1DFBC410CE42}"
+EndProject
+Project("{EC5BFE81-9B64-957B-8D36-BD8D0BFAC1D7}") = "UrsaMinor", "Assembly-CSharp.csproj", "{3706F5B1-D9F7-1304-5D46-248E75250EEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81E69B99-E744-8E54-CA7E-1DFBC410CE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81E69B99-E744-8E54-CA7E-1DFBC410CE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81E69B99-E744-8E54-CA7E-1DFBC410CE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81E69B99-E744-8E54-CA7E-1DFBC410CE42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3706F5B1-D9F7-1304-5D46-248E75250EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3706F5B1-D9F7-1304-5D46-248E75250EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3706F5B1-D9F7-1304-5D46-248E75250EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3706F5B1-D9F7-1304-5D46-248E75250EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
