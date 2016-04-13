@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
     private Camera _mainCamera;
+    public GameObject _ursa;
 
     void Start()
     {
@@ -12,11 +13,14 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        
+        Follow();
     }
 
-    private void Follow(Transform subject)
+    private void Follow()
     {
-        iTween.MoveTo(new GameObject(), new Vector3(0, 0, 0), 2);
+        Hashtable ht = new Hashtable();
+        ht.Add("easetype", iTween.EaseType.easeInSine);
+        ht.Add("x", _ursa.transform.position.x);
+        iTween.MoveTo(this.gameObject, ht);
     }
 }
