@@ -3,8 +3,6 @@ using System.Collections;
 
 public class UrsaController : BearController
 {
-    
-
     protected override void Start()
     {
         base.Start();

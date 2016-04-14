@@ -18,7 +18,7 @@ public class MovementController : MonoBehaviour
     }
 
     #region MoveMethods
-    protected virtual void Move(Vector2 velocity)
+    protected void Move(Vector2 velocity)
     {
         _myRigidbody.AddForce(velocity);
     }
