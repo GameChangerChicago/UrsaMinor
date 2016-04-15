@@ -51,30 +51,30 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        Follow();
+        //Follow(Ursa);
     }
 
-    private void Follow()
+    public void Follow(GameObject target)
     {
         //if (Ursa.transform.position.x > this.transform.position.x + 2)
         //{
         //    this.transform.Translate(new Vector3(6 * Time.deltaTime, 0, 0));
         //}
         //else 
-        if (Ursa.transform.position.x > this.transform.position.x + 0.1f)
+        if (target.transform.position.x > this.transform.position.x + 0.1f)
         {
             //finishCamMovement = false;
-            float xVel = Ursa.transform.position.x - this.transform.position.x;
-            this.transform.position = new Vector3(Mathf.SmoothDamp(this.transform.position.x, Ursa.transform.position.x, ref xVel, 0.07f, 5, Time.deltaTime), 0, -10);//new Vector3(Mathf.Lerp(this.transform.position.x, Ursa.transform.position.x, /*ref xVel,*/ 0.05f)* 5 * Time.deltaTime, 0, -10);
+            float xVel = target.transform.position.x - this.transform.position.x;
+            this.transform.position = new Vector3(Mathf.SmoothDamp(this.transform.position.x, target.transform.position.x, ref xVel, 0.07f, 5, Time.deltaTime), 0, -10);//new Vector3(Mathf.Lerp(this.transform.position.x, Ursa.transform.position.x, /*ref xVel,*/ 0.05f)* 5 * Time.deltaTime, 0, -10);
         }
         //else if(Ursa.transform.position.x < this.transform.position.x - 2)
         //{
         //    this.transform.Translate(new Vector3(-6 * Time.deltaTime, 0, 0));
         //}
-        else if (Ursa.transform.position.x < this.transform.position.x - 0.1f)
+        else if (target.transform.position.x < this.transform.position.x - 0.1f)
         {
             //finishCamMovement = false;
-            this.transform.Translate(new Vector3((Ursa.transform.position.x - this.transform.position.x) * 2.5f * Time.deltaTime, 0, 0));
+            this.transform.Translate(new Vector3((target.transform.position.x - this.transform.position.x) * 2.5f * Time.deltaTime, 0, 0));
         }
         //else if(Ursa.transform.position.x > this.transform.position.x + 0.01f || Ursa.transform.position.x < this.transform.position.x - 0.01f && !ursaMoving)
         //{

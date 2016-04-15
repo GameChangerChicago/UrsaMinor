@@ -30,7 +30,7 @@ public class TalkBubble : MonoBehaviour
     {
         if (_mySpriteRenderer.color.a > 0)
         {
-            _mySpriteRenderer.color = new Color(1, 1, 1, _mySpriteRenderer.color.a - (1 / (1 / Time.deltaTime)));
+            _mySpriteRenderer.color = new Color(1, 1, 1, _mySpriteRenderer.color.a - (1 / (0.25f / Time.deltaTime)));
         }
         else
             Destroy(this.gameObject);

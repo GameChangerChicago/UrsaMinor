@@ -7,6 +7,23 @@ public class MovementController : MonoBehaviour
                  MoveSpeed;
     protected Rigidbody2D _myRigidbody;
 
+    protected bool facingRight
+    {
+        get
+        {
+            return _facingRight;
+        }
+        set
+        {
+            if (value != _facingRight)
+            {
+                this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
+                _facingRight = value;
+            }
+        }
+    }
+    private bool _facingRight = true;
+
     protected virtual void Start()
     {
         _myRigidbody = GetComponent<Rigidbody2D>();
@@ -33,11 +50,13 @@ public class MovementController : MonoBehaviour
     }
     protected virtual void MoveLeft(float intensity)
     {
+        facingRight = false;
         if (_myRigidbody.velocity.x > -MaxSpeed)
             Move(new Vector2(-intensity, 0));
     }
     protected virtual void MoveRight(float intensity)
     {
+        facingRight = true;
         if (_myRigidbody.velocity.x < MaxSpeed)
             Move(new Vector2(intensity, 0));
     }

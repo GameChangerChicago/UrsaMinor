@@ -32,6 +32,11 @@ public class BearController : MovementController
     protected override void Update()
     {
         base.Update();
+
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Call(1, TalkBubbleTypes.ANGRY);
+        }
     }
 
     protected virtual void Jump()
@@ -71,6 +76,7 @@ public class BearController : MovementController
                 Debug.LogWarning("That talk bubble type either doesn't exist or hasn't been set up yet.");
                 break;
         }
+        talkBubbleObject.transform.localScale = new Vector3(this.transform.localScale.x, 1, 1);
         TalkBubble talkBubble = talkBubbleObject.GetComponent<TalkBubble>();
         talkBubble.Duration = duration;
     }

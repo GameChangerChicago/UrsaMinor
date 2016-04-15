@@ -7,3 +7,11 @@ public enum TalkBubbleTypes
     RIGHTARROW,
     ANGRY
 }
+
+public enum NPCStates
+{
+    IDLE,
+    PATROL,
+    CALL,
+    RUNAWAY
+}

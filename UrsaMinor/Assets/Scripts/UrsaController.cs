@@ -3,14 +3,20 @@ using System.Collections;
 
 public class UrsaController : BearController
 {
+    private CameraController myCameraController;
+
     protected override void Start()
     {
         base.Start();
+
+        myCameraController = Camera.main.GetComponent<CameraController>();
     }
 
     protected override void Update()
     {
         base.Update();
+
+        myCameraController.Follow(this.gameObject);
 
         if(Input.GetKey(KeyCode.J) && !jumped)
         {
