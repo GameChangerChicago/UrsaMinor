@@ -41,7 +41,7 @@ public class BearController : MovementController
 
     protected virtual void Jump()
     {
-        if (_myRigidbody.velocity.y < FullJumpSpeed)
+        if (myRigidbody.velocity.y < FullJumpSpeed)
         {
             MoveUp(JumpVelocity);
         }
