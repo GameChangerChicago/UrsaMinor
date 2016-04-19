@@ -16,8 +16,6 @@ public class UrsaController : BearController
     {
         base.Update();
 
-        myCameraController.Follow(this.gameObject);
-
         if(Input.GetKey(KeyCode.J) && !jumped)
         {
             isGrounded = false;
