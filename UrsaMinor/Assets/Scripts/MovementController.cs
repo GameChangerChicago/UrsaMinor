@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
     public float MaxSpeed,
                  MoveSpeed;
     protected Rigidbody2D myRigidbody;
+    protected GameManager myGameManager;
 
     protected bool facingRight
     {

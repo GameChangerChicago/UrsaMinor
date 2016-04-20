@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     private float _lastUrsaPos = 0;
     private bool _changingFocus,
-                 _watchingUrsa;
+                 _watchingUrsa = true;
 
     void Start()
     {

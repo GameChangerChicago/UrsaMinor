@@ -16,8 +16,9 @@ public class UrsaController : BearController
     {
         base.Update();
 
-        if(Input.GetKey(KeyCode.J) && !jumped)
+        if(Input.GetKey(KeyCode.Mouse0) && !jumped)
         {
+            MakeNoise(false);
             isGrounded = false;
             Jump();
         }

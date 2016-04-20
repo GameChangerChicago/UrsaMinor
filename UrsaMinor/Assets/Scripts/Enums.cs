@@ -15,3 +15,10 @@ public enum NPCStates
     CALL,
     RUNAWAY
 }
+
+public enum BearSounds
+{
+    HAPPY,
+    ANGRY,
+    SWIPE
+}

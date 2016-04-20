@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 097cf4ce3dc64454fbddd081ccbda8bd
+timeCreated: 1461184064
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - LevelBGM: {fileID: 8300000, guid: 895ecdff6690ec440a1c496aaa5d5c4b, type: 3}
+  - MenuBGM: {fileID: 8300000, guid: b0d3adb17a98bfc458eba5f59c0f8afb, type: 3}
+  - OwlbertHit: {fileID: 8300000, guid: 790f72233a5ab6d4e97f1c23f7d25cc7, type: 3}
+  - OwlEnd: {fileID: 8300000, guid: 11d65e07fd9a2da4885596d8453c1894, type: 3}
+  - OwlStart: {fileID: 8300000, guid: 4626b296fb0c49446b0a19e8794fa8ff, type: 3}
+  - BearAngry1: {fileID: 8300000, guid: bd32b87bd46419d4499e3e8e5aafaca0, type: 3}
+  - BearAngry2: {fileID: 8300000, guid: 2934dd4e8083b7f49b2bf5ebfe7d2bbb, type: 3}
+  - BearAngry3: {fileID: 8300000, guid: 97ff136c6ef5bbc43a2c60e88175fc56, type: 3}
+  - AdultBearHappy1: {fileID: 8300000, guid: ff8d8ed1d08cb0a40b2e7c45d2f8fa72, type: 3}
+  - AdultBearHappy2: {fileID: 8300000, guid: 7d1895e2eb03765499b02cdc4cbd4a85, type: 3}
+  - AdultBearHappy3: {fileID: 8300000, guid: f15af0537e4f8734894473d069993b13, type: 3}
+  - AdultBearHappy4: {fileID: 8300000, guid: 6fc43a231838c5b4194e30d7b60a2360, type: 3}
+  - SmallBearHappy1: {fileID: 8300000, guid: f3369e2eaaecf6c42b89ed84d271ef82, type: 3}
+  - SmallBearHappy2: {fileID: 8300000, guid: 1e6987cb352729e44b2c987469df7b76, type: 3}
+  - SmallBearHappy3: {fileID: 8300000, guid: 435dd04099251764b95cb2d94092f7d1, type: 3}
+  - SmallBearHappy4: {fileID: 8300000, guid: 281e8f09c86eb884faeb3ebe12010d92, type: 3}
+  - BearSwipe1: {fileID: 8300000, guid: f58d5916a811dc64b9607fb66195da30, type: 3}
+  - BearSwipe2: {fileID: 8300000, guid: e3347f23c6fc0764782ed439586ea2ef, type: 3}
+  - BearSwipe3: {fileID: 8300000, guid: 14de125d0ab60e74787e2d685db9863a, type: 3}
+  - RibitClickIt1: {fileID: 8300000, guid: 73633ee8472347f4b89ed889bc27bb73, type: 3}
+  - RibitClickIt2: {fileID: 8300000, guid: 31dcffdc0e7565c46a6dbcef0d3cd138, type: 3}
+  - RibitClickIt3: {fileID: 8300000, guid: 9d62dbe3dac4cc84bb413b946c7d52c6, type: 3}
+  - ButtonSelect: {fileID: 8300000, guid: abd27523430f1684ca0bda9a5142cf09, type: 3}
+  - ButtonClick: {fileID: 8300000, guid: 601ce3c1c0cde0646a37468060653d9a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
