@@ -148,6 +148,7 @@ public class BearController : MovementController
 
     protected void MakeNoise(bool angry)
     {
+        Debug.Log("syo");
         int angryIndex = Random.Range(0, 2);
         int happyIndex = Random.Range(0, 3);
 
