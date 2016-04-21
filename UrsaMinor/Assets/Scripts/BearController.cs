@@ -7,7 +7,52 @@ public class BearController : MovementController
     public float FullJumpSpeed,
                  JumpVelocity;
     public bool SmallBear;
-    protected bool jumped;
+
+    protected Animator myAnimator;
+    protected bool jumped
+    {
+        get
+        {
+            return _jumped;
+        }
+        set
+        {
+            if (value != _jumped)
+            {
+                if (value)
+                {
+                    jumpInitiated = false;
+                    myRigidbody.gravityScale = 5;
+                }
+
+                myAnimator.SetBool("jumped", value);
+                _jumped = value;
+            }
+        }
+    }
+    private bool _jumped;
+
+    protected bool jumpInitiated
+    {
+        get
+        {
+            return _jumpInitiated;
+        }
+        set
+        {
+            if(_jumpInitiated != value)
+            {
+                if (value)
+                {
+                    myRigidbody.gravityScale = 0;
+                }
+
+                myAnimator.SetBool("jumpStart", value);
+                _jumpInitiated = value;
+            }
+        }
+    }
+    private bool _jumpInitiated;
 
     protected bool isGrounded
     {
@@ -19,6 +64,12 @@ public class BearController : MovementController
         {
             if (value != _isGrounded)
             {
+                if (value)
+                {
+                    jumped = false;
+                }
+
+                myAnimator.SetBool("landed", value);
                 _isGrounded = value;
             }
         }
@@ -32,6 +83,7 @@ public class BearController : MovementController
     protected override void Start()
     {
         base.Start();
+        myAnimator = this.GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -42,6 +94,8 @@ public class BearController : MovementController
         {
             Call(1, TalkBubbleTypes.ANGRY);
         }
+
+        myAnimator.SetFloat("xVelocity", Mathf.Abs(myRigidbody.velocity.x));
     }
 
     protected virtual void Jump()

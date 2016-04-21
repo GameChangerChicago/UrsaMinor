@@ -4,7 +4,7 @@ using System.Collections;
 public class UrsaController : BearController
 {
     private CameraController myCameraController;
-    private bool _jumpInitiated;
+                 //_jumpFinished = true;
 
     protected override void Start()
     {
@@ -17,20 +17,22 @@ public class UrsaController : BearController
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !jumped && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !jumped)
         {
             MakeNoise(false);
-            _jumpInitiated = true;
+            jumpInitiated = true;
         }
-        if (Input.GetKey(KeyCode.Mouse0) && !jumped && _jumpInitiated)
+        if (Input.GetKey(KeyCode.Mouse0) && !jumped && jumpInitiated)
         {
             isGrounded = false;
             Jump();
         }
         if(Input.GetKeyUp(KeyCode.Mouse0))
         {
-            jumped = false;
-            _jumpInitiated = false;
+            if (!isGrounded)
+                jumped = true;
+            else
+                jumped = false;
         }
         if(Input.GetKeyDown(KeyCode.O))
         {
