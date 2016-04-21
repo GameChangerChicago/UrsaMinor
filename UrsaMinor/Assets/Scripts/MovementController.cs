@@ -28,6 +28,7 @@ public class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myGameManager = FindObjectOfType<GameManager>();
     }
     
     protected virtual void Update()

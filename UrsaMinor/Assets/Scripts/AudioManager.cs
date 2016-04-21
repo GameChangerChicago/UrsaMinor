@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Main")
         {
             BGMSource.clip = AudioLoader.instance.LevelBGM;
             BGMSource.Play();
@@ -22,5 +22,9 @@ public class AudioManager : MonoBehaviour
     {
         SFXSources[_SFXSourceIndex].clip = clip;
         SFXSources[_SFXSourceIndex++].Play();
+        if(_SFXSourceIndex == SFXSources.Length)
+        {
+            _SFXSourceIndex = 0;
+        }
     }
 }
