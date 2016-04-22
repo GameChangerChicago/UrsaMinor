@@ -45,6 +45,7 @@ public class OwlbertController : MovementController
         base.Update();
 
         MoveToNode();
+        myAnimator.SetFloat("yVelocity", myRigidbody.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -56,8 +57,6 @@ public class OwlbertController : MovementController
     {
         if (_currentNodeIndex < TravelNodes.Count)
             _currentTarget = TravelNodes[++_currentNodeIndex].transform.position;
-        else
-            Debug.Log("sup");
     }
 
     private void MoveToNode()

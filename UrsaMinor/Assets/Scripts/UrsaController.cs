@@ -34,9 +34,15 @@ public class UrsaController : BearController
             else
                 jumped = false;
         }
-        if(Input.GetKeyDown(KeyCode.O))
+        if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Call(3, TalkBubbleTypes.ANGRY);
+            Swipe();
+        }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            myAnimator.SetBool("calling", true);
+            Call(0.5f, TalkBubbleTypes.LEFTARROW);
         }
 
         if(Input.GetKey(KeyCode.LeftArrow))

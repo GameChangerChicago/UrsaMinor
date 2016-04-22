@@ -8,7 +8,6 @@ public class BearController : MovementController
                  JumpVelocity;
     public bool SmallBear;
 
-    protected Animator myAnimator;
     protected bool jumped
     {
         get
@@ -80,10 +79,11 @@ public class BearController : MovementController
                   angryCallIndex,
                   swipeIndex;
 
+    private bool _swatting;
+
     protected override void Start()
     {
         base.Start();
-        myAnimator = this.GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -148,7 +148,6 @@ public class BearController : MovementController
 
     protected void MakeNoise(bool angry)
     {
-        Debug.Log("syo");
         int angryIndex = Random.Range(0, 2);
         int happyIndex = Random.Range(0, 3);
 
@@ -192,5 +191,28 @@ public class BearController : MovementController
                     Debug.LogWarning("This index should be any lower than 0 or higher than 2.");
             }
         }
+    }
+
+    protected void Swipe()
+    {
+        myAnimator.SetBool("swatting", true);
+        _swatting = true;
+    }
+
+    public void FinishSwipe()
+    {
+        myAnimator.SetBool("swatting", false);
+        _swatting = false;
+    }
+
+    protected override void Move(Vector2 velocity)
+    {
+        if (!_swatting)
+            base.Move(velocity);
+    }
+
+    public void FinishCall()
+    {
+        myAnimator.SetBool("calling", false);
     }
 }

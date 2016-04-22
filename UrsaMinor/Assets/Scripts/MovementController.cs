@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
                  MoveSpeed;
     protected Rigidbody2D myRigidbody;
     protected GameManager myGameManager;
+    protected Animator myAnimator;
 
     protected bool facingRight
     {
@@ -29,6 +30,7 @@ public class MovementController : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myGameManager = FindObjectOfType<GameManager>();
+        myAnimator = this.GetComponent<Animator>();
     }
     
     protected virtual void Update()
@@ -37,7 +39,7 @@ public class MovementController : MonoBehaviour
     }
 
     #region MoveMethods
-    protected void Move(Vector2 velocity)
+    protected virtual void Move(Vector2 velocity)
     {
         myRigidbody.AddForce(velocity);
     }
