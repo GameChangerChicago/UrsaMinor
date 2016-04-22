@@ -90,11 +90,6 @@ public class BearController : MovementController
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            Call(1, TalkBubbleTypes.ANGRY);
-        }
-
         myAnimator.SetFloat("xVelocity", Mathf.Abs(myRigidbody.velocity.x));
     }
 
@@ -211,8 +206,9 @@ public class BearController : MovementController
             base.Move(velocity);
     }
 
-    public void FinishCall()
+    public virtual void FinishCall()
     {
+        Debug.Log("poop?");
         myAnimator.SetBool("calling", false);
     }
 }

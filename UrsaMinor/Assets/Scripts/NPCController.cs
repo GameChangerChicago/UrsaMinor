@@ -43,6 +43,11 @@ public class NPCController : BearController
         base.Update();
 
         NPCBehavior();
+        
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            Call(0.5f, TalkBubbleTypes.ANGRY);
+        }
     }
 
     private void NPCBehavior()
@@ -82,14 +87,17 @@ public class NPCController : BearController
         }
     }
 
-    private void FinishCall()
+    public override void FinishCall()
     {
+        Debug.Log("now");
+        base.FinishCall();
         currentState = _lastState;
     }
 
     public override void Call(float duration, TalkBubbleTypes currentType)
     {
         base.Call(duration, currentType);
+        myAnimator.SetBool("calling", true);
         _currentDuration = duration;
         currentState = NPCStates.CALL;
     }
