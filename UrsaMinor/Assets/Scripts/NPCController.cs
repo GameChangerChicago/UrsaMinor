@@ -35,8 +35,17 @@ public class NPCController : BearController
     private NPCStates _lastState = NPCStates.IDLE;
 
     public GameObject EdgeChecker;
+    public bool IsParent;
     private float _currentDuration;
     private bool _movingRight = true;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (IsParent)
+            currentState = NPCStates.IDLE;
+    }
 
     protected override void Update()
     {
@@ -69,7 +78,7 @@ public class NPCController : BearController
                 Collider2D obstacle = Physics2D.OverlapCircle(new Vector2(EdgeChecker.transform.position.x, EdgeChecker.transform.position.y), 0.1f);
                 if (obstacle)
                 {
-                    if(obstacle.tag == "Wall")
+                    if(obstacle.tag == "Ground")
                     {
                         _movingRight = !_movingRight;
                     }
