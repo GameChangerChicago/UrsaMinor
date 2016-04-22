@@ -208,7 +208,6 @@ public class BearController : MovementController
 
     public virtual void FinishCall()
     {
-        Debug.Log("poop?");
         myAnimator.SetBool("calling", false);
     }
 }

@@ -18,14 +18,6 @@ public class OwlbertController : MovementController
         {
             if (value != _movingUp)
             {
-                if (value)
-                {
-                    Debug.Log("Flap Anim");
-                }
-                else
-                {
-                    Debug.Log("Glide Anim");
-                }
                 _movingUp = value;
             }
         }
@@ -93,5 +85,18 @@ public class OwlbertController : MovementController
         {
             SetNextTarget();
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "SwipeCollider")
+        {
+            myAnimator.SetBool("dead", true);
+        }
+    }
+
+    public void Death()
+    {
+        Destroy(this.gameObject);
     }
 }

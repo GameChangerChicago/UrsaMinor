@@ -22,7 +22,7 @@ public class NPCController : BearController
                     case NPCStates.PATROL:
                         break;
                     case NPCStates.CALL:
-                        Invoke("FinishCall", _currentDuration);
+                        Invoke("EndCallState", _currentDuration);
                         break;
                     case NPCStates.RUNAWAY:
                         break;
@@ -87,18 +87,17 @@ public class NPCController : BearController
         }
     }
 
-    public override void FinishCall()
-    {
-        Debug.Log("now");
-        base.FinishCall();
-        currentState = _lastState;
-    }
-
     public override void Call(float duration, TalkBubbleTypes currentType)
     {
         base.Call(duration, currentType);
         myAnimator.SetBool("calling", true);
         _currentDuration = duration;
         currentState = NPCStates.CALL;
+    }
+
+    private void EndCallState()
+    {
+        myAnimator.SetBool("calling", false);
+        currentState = _lastState;
     }
 }
