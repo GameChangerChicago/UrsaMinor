@@ -198,6 +198,13 @@ public class BearController : MovementController
     {
         myAnimator.SetBool("swatting", false);
         _swatting = false;
+
+        if(this is NPCController)
+        {
+            NPCController thisNPC = (NPCController)this;
+            thisNPC.NPCSwipeFinsih();
+        }
+        
     }
 
     protected override void Move(Vector2 velocity)

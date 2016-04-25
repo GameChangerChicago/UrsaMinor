@@ -55,13 +55,13 @@ public class OwlbertController : MovementController
     {
         if (Vector2.Distance(this.transform.position, _currentTarget) > 0.5f)
         {
-            if (this.transform.position.y < _currentTarget.y - 0.6f)
+            if (this.transform.position.y < _currentTarget.y - 0.4f)
             {
                 _yMovementCompete = false;
                 MoveUp(MoveSpeed);
                 movingUp = true;
             }
-            else if (this.transform.position.y > _currentTarget.y + 0.6f)
+            else if (this.transform.position.y > _currentTarget.y + 0.4f)
             {
                 _yMovementCompete = false;
                 MoveDown(MoveSpeed);
@@ -78,18 +78,25 @@ public class OwlbertController : MovementController
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x / 1.1f, myRigidbody.velocity.y);
             }
+            //else if()
             else
                 MoveRight(MoveSpeed);
         }
-        else
+        else if (_currentNodeIndex < TravelNodes.Count - 1)
         {
             SetNextTarget();
+        }
+        else
+        {
+            this.transform.position = new Vector2(TravelNodes[0].transform.position.x - 6.8f, TravelNodes[0].transform.position.y + 1.3f);
+            _currentNodeIndex = 0;
+            _currentTarget = TravelNodes[_currentNodeIndex].transform.position;
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "SwipeCollider")
+        if (col.name == "SwipHitBox")
         {
             myAnimator.SetBool("dead", true);
         }

@@ -24,6 +24,9 @@ public class NPCController : BearController
                     case NPCStates.CALL:
                         Invoke("EndCallState", _currentDuration);
                         break;
+                    case NPCStates.SWIPE:
+                        Invoke("Swipe", 0.35f);
+                        break;
                     case NPCStates.RUNAWAY:
                         break;
                 }
@@ -64,7 +67,7 @@ public class NPCController : BearController
         switch(currentState)
         {
             case NPCStates.IDLE:
-                Debug.Log("Nothing");
+                
                 break;
             case NPCStates.PATROL:
                 if(_movingRight)
@@ -75,6 +78,7 @@ public class NPCController : BearController
                 {
                     MoveLeft(MoveSpeed);   
                 }
+
                 Collider2D obstacle = Physics2D.OverlapCircle(new Vector2(EdgeChecker.transform.position.x, EdgeChecker.transform.position.y), 0.1f);
                 if (obstacle)
                 {
@@ -90,6 +94,8 @@ public class NPCController : BearController
             case NPCStates.RUNAWAY:
                 Debug.Log("Retreat!");
                 break;
+            case NPCStates.SWIPE:
+                break;
             default:
                 Debug.LogWarning("That stated doesn't exist in this context.");
                 break;
@@ -104,9 +110,22 @@ public class NPCController : BearController
         currentState = NPCStates.CALL;
     }
 
+    public void NPCSwipeFinsih()
+    {
+        if (_lastState != NPCStates.CALL)
+            currentState = _lastState;
+        else
+            currentState = NPCStates.PATROL;
+    }
+
     private void EndCallState()
     {
         myAnimator.SetBool("calling", false);
         currentState = _lastState;
+    }
+
+    public void EnemySpotted()
+    {
+        currentState = NPCStates.SWIPE;
     }
 }

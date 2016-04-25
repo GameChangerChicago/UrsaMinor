@@ -13,6 +13,7 @@ public enum NPCStates
     IDLE,
     PATROL,
     CALL,
+    SWIPE,
     RUNAWAY
 }
 
