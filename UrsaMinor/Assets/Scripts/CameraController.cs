@@ -32,7 +32,6 @@ public class CameraController : MonoBehaviour
         }
         else if(Vector2.Distance(_target.transform.position, this.transform.position) < 2)
         {
-            Debug.Log("eh?");
             _changingFocus = false;
         }
 
@@ -49,15 +48,15 @@ public class CameraController : MonoBehaviour
 
 	public void ChangeFocus (GameObject target)
 	{
-        iTween.MoveTo(this.gameObject, new Vector3(target.transform.position.x, target.transform.position.y, this.transform.position.z), 1);
+        iTween.MoveTo(this.gameObject, new Vector3(target.transform.position.x, target.transform.position.y, this.transform.position.z), 0.5f);
         _changingFocus = true;
         _target = target;
-        Invoke("ChangeBack", 2);
+        Invoke("ChangeBack", 4);
 	}
 
     private void ChangeBack()
     {
-        iTween.MoveTo(this.gameObject, Ursa.transform.position, 1);
+        iTween.MoveTo(this.gameObject, new Vector3(Ursa.transform.position.x, Ursa.transform.position.y, this.transform.position.z), 1);
         _changingFocus = true;
         _target = Ursa;
     }

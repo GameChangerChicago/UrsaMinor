@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource BGMSource;
     public AudioSource[] SFXSources;
 
+    private float _BGMTime;
     private int _SFXSourceIndex;
 
     void Start()
@@ -26,5 +27,21 @@ public class AudioManager : MonoBehaviour
         {
             _SFXSourceIndex = 0;
         }
+    }
+
+    public void PlayerStartTrackPlay()
+    {
+        _BGMTime = BGMSource.time;
+        BGMSource.clip = AudioLoader.instance.OwlStart;
+        BGMSource.time = 0;
+        BGMSource.Play();
+        Invoke("GoBackToBGM", 2);
+    }
+
+    private void GoBackToBGM()
+    {
+        BGMSource.clip = AudioLoader.instance.LevelBGM;
+        BGMSource.Play();
+        BGMSource.time = _BGMTime;
     }
 }

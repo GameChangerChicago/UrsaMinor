@@ -4,7 +4,15 @@ using System.Collections.Generic;
 
 public class OwlbertController : MovementController
 {
+    public enum OwlbertStates
+    {
+        IDLE,
+        FOLLOWROUTE,
+        DEATH
+    }
+
     public List<TravelNode> TravelNodes;
+    public Transform StartPoint;
 
     private Vector2 _currentTarget;
     private int _currentNodeIndex;
@@ -23,6 +31,39 @@ public class OwlbertController : MovementController
         }
     }
     private bool _movingUp;
+
+    protected OwlbertStates currentState
+    {
+        get
+        {
+            return _currentState;
+        }
+        set
+        {
+            if (value != _currentState)
+            {
+                switch(value)
+                {
+                    case OwlbertStates.IDLE:
+                        myAnimator.SetBool("dead", false);
+                        myAnimator.SetBool("moving", false);
+                        break;
+                    case OwlbertStates.FOLLOWROUTE:
+                        myAnimator.SetBool("moving", true);
+                        break;
+                    case OwlbertStates.DEATH:
+                        myAnimator.SetBool("dead", true);
+                        break;
+                    default:
+                        Debug.LogWarning("That state doens't exist...");
+                        break;
+                }
+                _currentState = value;
+            }
+        }
+    }
+    private OwlbertStates _currentState;
+
     private bool _yMovementCompete;
 
     protected override void Start()
@@ -36,17 +77,34 @@ public class OwlbertController : MovementController
     {
         base.Update();
 
+        OwlBehavior();
+
         if(Input.GetKeyDown(KeyCode.Y))
         {
             FindObjectOfType<CameraController>().ChangeFocus(this.gameObject);
         }
 
-        MoveToNode();
+
+
         myAnimator.SetFloat("yVelocity", myRigidbody.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             SetNextTarget();
+        }
+    }
+
+    private void OwlBehavior()
+    {
+        switch(currentState)
+        {
+            case OwlbertStates.IDLE:
+                break;
+            case OwlbertStates.FOLLOWROUTE:
+                MoveToNode();
+                break;
+            case OwlbertStates.DEATH:myAnimator.SetBool("dead", true);
+                break;
         }
     }
 
@@ -103,12 +161,30 @@ public class OwlbertController : MovementController
     {
         if (col.name == "SwipHitBox")
         {
-            myAnimator.SetBool("dead", true);
+            myGameManager.TheAuidoManager.PlaySFX(AudioLoader.instance.OwlbertHit);
+            currentState = OwlbertStates.DEATH;
         }
+    }
+
+    public void Restart()
+    {
+        currentState = OwlbertStates.IDLE;
+        _currentNodeIndex = 0;
+        _currentTarget = TravelNodes[_currentNodeIndex].transform.position;
+        this.transform.position = StartPoint.position;
+        Invoke("StartMoving", 3);
+    }
+
+    private void StartMoving()
+    {
+        currentState = OwlbertStates.FOLLOWROUTE;
     }
 
     public void Death()
     {
-        Destroy(this.gameObject);
+        currentState = OwlbertStates.IDLE;
+        myRigidbody.velocity = Vector2.zero;
+        this.transform.position = new Vector3(500, 500, 500);
+        myGameManager.OwlbertLives--;
     }
 }
