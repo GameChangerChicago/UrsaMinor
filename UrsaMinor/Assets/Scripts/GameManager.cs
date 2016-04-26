@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayerStart();
         }
@@ -32,5 +32,10 @@ public class GameManager : MonoBehaviour
     private void PlayerStartAudio()
     {
         TheAuidoManager.PlayerStartTrackPlay();
+    }
+
+    public void GameOver()
+    {
+        
     }
 }

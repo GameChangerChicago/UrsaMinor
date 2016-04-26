@@ -112,16 +112,28 @@ public class NPCController : BearController
 
     public void NPCSwipeFinsih()
     {
-        if (_lastState != NPCStates.CALL)
-            currentState = _lastState;
+        if (IsParent)
+        {
+            currentState = NPCStates.IDLE;
+        }
         else
+        {
             currentState = NPCStates.PATROL;
+        }
     }
 
     private void EndCallState()
     {
         myAnimator.SetBool("calling", false);
-        currentState = _lastState;
+
+        if (IsParent)
+        {
+            currentState = NPCStates.IDLE;
+        }
+        else
+        {
+            currentState = NPCStates.PATROL;
+        }
     }
 
     public void EnemySpotted()

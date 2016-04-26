@@ -185,6 +185,9 @@ public class OwlbertController : MovementController
         currentState = OwlbertStates.IDLE;
         myRigidbody.velocity = Vector2.zero;
         this.transform.position = new Vector3(500, 500, 500);
-        myGameManager.OwlbertLives--;
+        if (myGameManager.OwlbertLives > 0)
+            myGameManager.OwlbertLives--;
+        else
+            myGameManager.GameOver();
     }
 }

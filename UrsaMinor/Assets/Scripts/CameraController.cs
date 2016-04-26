@@ -9,10 +9,13 @@ public class CameraController : MonoBehaviour
 
 	private float _lastUrsaPos = 0;
 	private bool _changingFocus,
-		         _watchingUrsa = true;
+		         _watchingUrsa = true,
+                 _fadingIn,
+                 _fadingOut;
 
 	private float minPosition = -10f;
 	private float maxPosition = 89f;
+    private SpriteRenderer _fadeMask;
 	private Transform cameraTransform;
     private GameObject _target;
 
@@ -21,6 +24,7 @@ public class CameraController : MonoBehaviour
 		_mainCamera = Camera.main;
 		_myRigidbody = this.GetComponent<Rigidbody2D> ();
         _target = Ursa;
+        _fadeMask = GetComponentInChildren<SpriteRenderer>();
 		//cameraTransform = _mainCamera.transform;
 	}
 
@@ -43,6 +47,41 @@ public class CameraController : MonoBehaviour
         if (_mainCamera.transform.position.x < minPosition)
         {
             _mainCamera.transform.position = new Vector3(minPosition, _mainCamera.transform.position.y, _mainCamera.transform.position.z);
+        }
+
+        if(_fadingIn || _fadingOut)
+        {
+            Fade();
+        }
+    }
+
+    public void FadeOut()
+    {
+        _fadingOut = true;
+    }
+    public void FadeIn()
+    {
+        _fadingIn = true;
+    }
+    private void Fade()
+    {
+        if(_fadingIn)
+        {
+            _fadeMask.color = new Color(1, 1, 1, _fadeMask.color.a - (Time.deltaTime));
+
+            if (_fadeMask.color.a < 0.05f)
+            {
+                _fadeMask.color = new Color(1, 1, 1, 0);
+            }
+        }
+        if(_fadingOut)
+        {
+            _fadeMask.color = new Color(1, 1, 1, _fadeMask.color.a + (Time.deltaTime));
+
+            if(_fadeMask.color.a > 0.95f)
+            {
+                _fadeMask.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
