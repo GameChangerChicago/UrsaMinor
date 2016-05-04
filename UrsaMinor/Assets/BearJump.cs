@@ -7,11 +7,13 @@ public class BearJump : MonoBehaviour
 
 	private bool clicked = false;
 	private Image image;
+    private Animator _myAnimator;
 
 
 	// Use this for initialization
 	void Start ()
 	{
+        _myAnimator = this.GetComponent<Animator>();
 		image = GetComponent<Image> ();
 	}
 	
@@ -44,6 +46,17 @@ public class BearJump : MonoBehaviour
 
 
 	}
+
+    public void Animate()
+    {
+        _myAnimator.SetBool("MenuJump", true);
+        Invoke("PostAnimate", 0.5f);
+    }
+
+    private void PostAnimate()
+    {
+        _myAnimator.SetBool("MenuJump", false);
+    }
 
 
 	private void ReturnColor ()
