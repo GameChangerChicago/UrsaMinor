@@ -121,6 +121,7 @@ public class BearController : MovementController
                 MakeNoise(true);
 
                 talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/AngryTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
             case TalkBubbleTypes.LEFTARROW:
                 MakeNoise(false);
@@ -136,7 +137,6 @@ public class BearController : MovementController
                 Debug.LogWarning("That talk bubble type either doesn't exist or hasn't been set up yet.");
                 break;
         }
-        talkBubbleObject.transform.localScale = new Vector3(this.transform.localScale.x, 1, 1);
         TalkBubble talkBubble = talkBubbleObject.GetComponent<TalkBubble>();
         talkBubble.Duration = duration;
     }
