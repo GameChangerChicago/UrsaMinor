@@ -5,6 +5,7 @@ public class UrsaController : BearController
 {
     public NPCController[] Parents;
     private CameraController myCameraController;
+    private float _clickTime;
     //_jumpFinished = true;
     private bool _firstJump = true;
 
@@ -23,6 +24,7 @@ public class UrsaController : BearController
         {
             MakeNoise(false);
             jumpInitiated = true;
+            _clickTime = 0;
             if(_firstJump)
             {
                 Parents[0].Call(0.5f, TalkBubbleTypes.ANGRY);
@@ -32,13 +34,16 @@ public class UrsaController : BearController
         }
         if (Input.GetKey(KeyCode.Mouse0) && !jumped && jumpInitiated)
         {
+            _clickTime += Time.deltaTime;
             isGrounded = false;
             Jump();
         }
         if(Input.GetKeyUp(KeyCode.Mouse0))
         {
-            if (!isGrounded)
+            if (!isGrounded && _clickTime >= 0.5f)
                 jumped = true;
+            else if (!isGrounded)
+                Invoke("DelayedJumpEnd", 0.5f - _clickTime);
             else
                 jumped = false;
         }
@@ -61,5 +66,10 @@ public class UrsaController : BearController
         {
             MoveRight(MoveSpeed);
         }
+    }
+
+    void DelayedJumpEnd()
+    {
+        jumped = true;
     }
 }
