@@ -4,7 +4,8 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
 	private Camera _mainCamera;
-	private Rigidbody2D _myRigidbody;
+	private Rigidbody2D _myRigidbody,
+                        _targetRigidbody;
     public GameObject Ursa;
 
 	private float _lastUrsaPos = 0;
@@ -24,6 +25,7 @@ public class CameraController : MonoBehaviour
 		_mainCamera = Camera.main;
 		_myRigidbody = this.GetComponent<Rigidbody2D> ();
         _target = Ursa;
+        _targetRigidbody = _target.GetComponent<Rigidbody2D>();
         _fadeMask = GetComponentInChildren<SpriteRenderer>();
 		//cameraTransform = _mainCamera.transform;
 	}
@@ -90,6 +92,7 @@ public class CameraController : MonoBehaviour
         iTween.MoveTo(this.gameObject, new Vector3(target.transform.position.x, target.transform.position.y, this.transform.position.z), 0.5f);
         _changingFocus = true;
         _target = target;
+        _targetRigidbody = _target.GetComponent<Rigidbody2D>();
         Invoke("ChangeBack", 4);
 	}
 
@@ -98,6 +101,7 @@ public class CameraController : MonoBehaviour
         iTween.MoveTo(this.gameObject, new Vector3(Ursa.transform.position.x, Ursa.transform.position.y, this.transform.position.z), 1);
         _changingFocus = true;
         _target = Ursa;
+        _targetRigidbody = _target.GetComponent<Rigidbody2D>();
     }
 
     //private void MoveToNewTarget()
@@ -109,7 +113,7 @@ public class CameraController : MonoBehaviour
     {
         if (_target.transform.position.x > this.transform.position.x + 1 || _target.transform.position.x < this.transform.position.x - 1)
         {
-            _myRigidbody.velocity = new Vector2(_target.GetComponent<Rigidbody2D>().velocity.x, _myRigidbody.velocity.y);
+            _myRigidbody.velocity = new Vector2(_targetRigidbody.velocity.x, _myRigidbody.velocity.y);
         }
         else
         {
@@ -117,9 +121,9 @@ public class CameraController : MonoBehaviour
             this.transform.Translate(new Vector3((_target.transform.position.x - this.transform.position.x) * 1f * Time.deltaTime, 0, 0));
         }
 
-        if (_target.transform.position.y > this.transform.position.y + 2 || _target.transform.position.y < this.transform.position.y - 2)
+        if (_target.transform.position.y > this.transform.position.y + 1 || _target.transform.position.y < this.transform.position.y - 1)
         {
-            _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _target.GetComponent<Rigidbody2D>().velocity.y);
+            _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, _targetRigidbody.velocity.y);
         }
         else
         {

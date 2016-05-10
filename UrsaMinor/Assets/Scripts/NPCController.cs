@@ -105,7 +105,12 @@ public class NPCController : BearController
     public override void Call(float duration, TalkBubbleTypes currentType)
     {
         base.Call(duration, currentType);
-        myAnimator.SetBool("calling", true);
+
+        if (currentType == TalkBubbleTypes.ANGRY)
+            myAnimator.SetBool("angryCalling", true);
+        else
+            myAnimator.SetBool("calling", true);
+
         _currentDuration = duration;
         currentState = NPCStates.CALL;
     }
@@ -125,6 +130,7 @@ public class NPCController : BearController
     private void EndCallState()
     {
         myAnimator.SetBool("calling", false);
+        myAnimator.SetBool("angryCalling", false);
 
         if (IsParent)
         {

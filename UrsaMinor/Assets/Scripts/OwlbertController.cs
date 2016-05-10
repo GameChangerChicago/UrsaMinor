@@ -103,7 +103,8 @@ public class OwlbertController : MovementController
             case OwlbertStates.FOLLOWROUTE:
                 MoveToNode();
                 break;
-            case OwlbertStates.DEATH:myAnimator.SetBool("dead", true);
+            case OwlbertStates.DEATH:
+                myAnimator.SetBool("dead", true);
                 break;
         }
     }
@@ -186,8 +187,14 @@ public class OwlbertController : MovementController
         myRigidbody.velocity = Vector2.zero;
         this.transform.position = new Vector3(500, 500, 500);
         if (myGameManager.OwlbertLives > 0)
+        {
             myGameManager.OwlbertLives--;
+            Debug.Log("pop");
+        }
         else
+        {
             myGameManager.GameOver();
+            Debug.Log("poop");
+        }
     }
 }

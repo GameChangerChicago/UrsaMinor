@@ -3,8 +3,10 @@ using System.Collections;
 
 public class UrsaController : BearController
 {
+    public NPCController[] Parents;
     private CameraController myCameraController;
-                 //_jumpFinished = true;
+    //_jumpFinished = true;
+    private bool _firstJump = true;
 
     protected override void Start()
     {
@@ -21,6 +23,12 @@ public class UrsaController : BearController
         {
             MakeNoise(false);
             jumpInitiated = true;
+            if(_firstJump)
+            {
+                Parents[0].Call(0.5f, TalkBubbleTypes.ANGRY);
+                Parents[1].Call(0.5f, TalkBubbleTypes.ANGRY);
+                _firstJump = false;
+            }
         }
         if (Input.GetKey(KeyCode.Mouse0) && !jumped && jumpInitiated)
         {
@@ -42,7 +50,7 @@ public class UrsaController : BearController
         if(Input.GetKeyDown(KeyCode.C))
         {
             myAnimator.SetBool("calling", true);
-            Call(0.5f, TalkBubbleTypes.LEFTARROW);
+            Call(0.2f, TalkBubbleTypes.LEFTARROW);
         }
 
         if(Input.GetKey(KeyCode.LeftArrow))

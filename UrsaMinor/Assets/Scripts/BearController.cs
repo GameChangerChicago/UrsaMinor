@@ -5,7 +5,8 @@ public class BearController : MovementController
 {
     public GameObject TalkBubblePoint;
     public float FullJumpSpeed,
-                 JumpVelocity;
+                 JumpVelocity,
+                 JumpHeight;
     public bool SmallBear;
 
     protected bool jumped
@@ -43,6 +44,7 @@ public class BearController : MovementController
             {
                 if (value)
                 {
+                    _initalHeight = this.transform.position.y;
                     myRigidbody.gravityScale = 0;
                 }
 
@@ -79,6 +81,7 @@ public class BearController : MovementController
                   angryCallIndex,
                   swipeIndex;
 
+    private float _initalHeight;
     private bool _swatting;
 
     protected override void Start()
@@ -95,7 +98,7 @@ public class BearController : MovementController
 
     protected virtual void Jump()
     {
-        if (myRigidbody.velocity.y < FullJumpSpeed)
+        if (this.transform.position.y < _initalHeight + JumpHeight)
         {
             MoveUp(JumpVelocity);
         }
