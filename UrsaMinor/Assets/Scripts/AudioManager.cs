@@ -12,11 +12,17 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Main")
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             BGMSource.clip = AudioLoader.instance.LevelBGM;
             BGMSource.Play();
         }
+    }
+
+    public void SetMainMenuTrack(AudioClip clip)
+    {
+        BGMSource.clip = clip;
+        BGMSource.Play();
     }
 
     public void PlaySFX(AudioClip clip)

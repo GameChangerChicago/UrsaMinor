@@ -189,12 +189,10 @@ public class OwlbertController : MovementController
         if (myGameManager.OwlbertLives > 0)
         {
             myGameManager.OwlbertLives--;
-            Debug.Log("pop");
         }
         else
         {
             myGameManager.GameOver();
-            Debug.Log("poop");
         }
     }
 }

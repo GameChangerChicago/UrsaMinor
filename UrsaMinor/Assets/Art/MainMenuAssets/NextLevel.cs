@@ -1,26 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class NextLevel : MonoBehaviour
 {
-
-	// Use this for initialization
-	void Start ()
+    public void NewLevel (string name)
 	{
-
+        SceneManager.LoadScene(name);
 	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-
-	}
-
-
-	public void NewLevel (string name)
-	{
-
-		Application.LoadLevel (name);
-	}
-
 }

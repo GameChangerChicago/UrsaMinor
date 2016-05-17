@@ -5,7 +5,42 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public AudioManager TheAuidoManager;
-    public GameObject Owlbert;
+    private GameObject _owlbert;
+    static int Playthroughs;
+    public int MamaCalls
+    {
+        get
+        {
+            return _mamaCalls;
+        }
+        set
+        {
+            _mamaCalls = value;
+
+            if(_mamaCalls > 2 && _papaCalls > 2)
+            {
+                //Happy Parents then the game starts
+            }
+        }
+    }
+    private int _mamaCalls;
+    public int PapaCalls
+    {
+        get
+        {
+            return _papaCalls;
+        }
+        set
+        {
+            _papaCalls = value;
+
+            if (_mamaCalls > 2 && _papaCalls > 2)
+            {
+                //Happy Parents then the game starts
+            }
+        }
+    }
+    private int _papaCalls;
     public int OwlbertLives
     {
         get
@@ -29,6 +64,28 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _cameraController = FindObjectOfType<CameraController>();
+        OwlbertController owlbert = FindObjectOfType<OwlbertController>();
+        if (owlbert)
+            _owlbert = owlbert.gameObject;
+
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            if (Playthroughs == 0)
+                TheAuidoManager.SetMainMenuTrack(AudioLoader.instance.RibitClickIt1);
+            else if (Playthroughs == 1)
+                TheAuidoManager.SetMainMenuTrack(AudioLoader.instance.RibitClickIt2);
+            else if (Playthroughs > 1)
+                TheAuidoManager.SetMainMenuTrack(AudioLoader.instance.RibitClickIt3);
+        }
+        else
+        {
+            if (Playthroughs > 0)
+            {
+                Invoke("PlayerStart", 0.5f);
+            }
+
+            Playthroughs++;
+        }
     }
 
     void Update()
@@ -41,8 +98,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerStart()
     {
-        Owlbert.GetComponent<OwlbertController>().Restart();
-        _cameraController.ChangeFocus(Owlbert);
+        _owlbert.GetComponent<OwlbertController>().Restart();
+        _cameraController.ChangeFocus(_owlbert);
         Invoke("PlayerStartAudio", 0.5f);
     }
 
@@ -53,7 +110,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("sup");
         TheAuidoManager.PlaySFX(AudioLoader.instance.OwlEnd);
         _cameraController.FadeOut();
         Invoke("ReturnToMenu", 1);
