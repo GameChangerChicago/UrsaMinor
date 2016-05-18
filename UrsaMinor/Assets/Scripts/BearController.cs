@@ -130,11 +130,19 @@ public class BearController : MovementController
                 MakeNoise(false);
 
                 talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/LeftArrowTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                //talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
             case TalkBubbleTypes.RIGHTARROW:
                 MakeNoise(false);
 
                 talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/RightArrowTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                //talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
+                break;
+            case TalkBubbleTypes.HAPPY:
+                MakeNoise(true);
+
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/HappyTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
             default:
                 Debug.LogWarning("That talk bubble type either doesn't exist or hasn't been set up yet.");

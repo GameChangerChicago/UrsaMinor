@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public AudioManager TheAuidoManager;
     private GameObject _owlbert;
+    private NPCController[] parents = new NPCController[2];
     static int Playthroughs;
     public int MamaCalls
     {
@@ -19,7 +20,8 @@ public class GameManager : MonoBehaviour
 
             if(_mamaCalls > 2 && _papaCalls > 2)
             {
-                //Happy Parents then the game starts
+                parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
+                parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
             }
         }
     }
@@ -36,7 +38,8 @@ public class GameManager : MonoBehaviour
 
             if (_mamaCalls > 2 && _papaCalls > 2)
             {
-                //Happy Parents then the game starts
+                parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
+                parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
             }
         }
     }
@@ -67,6 +70,19 @@ public class GameManager : MonoBehaviour
         OwlbertController owlbert = FindObjectOfType<OwlbertController>();
         if (owlbert)
             _owlbert = owlbert.gameObject;
+
+        NPCController[] npcControllers = FindObjectsOfType<NPCController>();
+
+        for (int i = 0; i < npcControllers.Length; i++)
+        {
+            if(npcControllers[i].IsParent)
+            {
+                if (!parents[0])
+                    parents[0] = npcControllers[i];
+                else
+                    parents[1] = npcControllers[i]; 
+            }
+        }
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {

@@ -5,7 +5,8 @@ public enum TalkBubbleTypes
 {
     LEFTARROW,
     RIGHTARROW,
-    ANGRY
+    ANGRY,
+    HAPPY
 }
 
 public enum NPCStates
