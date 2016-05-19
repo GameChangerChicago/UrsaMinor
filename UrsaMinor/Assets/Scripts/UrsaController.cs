@@ -28,7 +28,9 @@ public class UrsaController : BearController
             if(_firstJump)
             {
                 Parents[0].Call(0.5f, TalkBubbleTypes.ANGRY);
+                Parents[0].DisableParentRaction();
                 Parents[1].Call(0.5f, TalkBubbleTypes.ANGRY);
+                Parents[1].DisableParentRaction();
                 _firstJump = false;
             }
         }

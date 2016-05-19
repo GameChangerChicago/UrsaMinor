@@ -38,6 +38,7 @@ public class NPCController : BearController
     private NPCStates _lastState = NPCStates.IDLE;
 
     public GameObject EdgeChecker;
+    public GameObject ParentReaction;
     public bool IsParent;
     private float _currentDuration;
     private bool _movingRight = true;
@@ -145,5 +146,10 @@ public class NPCController : BearController
     public void EnemySpotted()
     {
         currentState = NPCStates.SWIPE;
+    }
+
+    public void DisableParentRaction()
+    {
+        ParentReaction.GetComponent<Collider2D>().enabled = false;
     }
 }

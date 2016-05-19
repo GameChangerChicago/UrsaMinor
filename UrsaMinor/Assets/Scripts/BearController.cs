@@ -77,6 +77,7 @@ public class BearController : MovementController
     }
     private bool _isGrounded;
 
+    protected GameObject callBubble;
     protected int happyCallIndex,
                   angryCallIndex,
                   swipeIndex;
@@ -118,6 +119,12 @@ public class BearController : MovementController
     public virtual void Call(float duration, TalkBubbleTypes currentType)
     {
         GameObject talkBubbleObject = new GameObject();
+
+        if(callBubble)
+        {
+            Destroy(callBubble);
+        }
+
         switch (currentType)
         {
             case TalkBubbleTypes.ANGRY:
@@ -149,6 +156,7 @@ public class BearController : MovementController
                 break;
         }
         TalkBubble talkBubble = talkBubbleObject.GetComponent<TalkBubble>();
+        callBubble = talkBubbleObject;
         talkBubble.Duration = duration;
     }
 
