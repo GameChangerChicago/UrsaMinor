@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
             {
                 parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
                 parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
+                Invoke("PlayerStart", 1.0f);
             }
         }
     }
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
             {
                 parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
                 parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
+                Invoke("PlayerStart", 1.0f);
             }
         }
     }
