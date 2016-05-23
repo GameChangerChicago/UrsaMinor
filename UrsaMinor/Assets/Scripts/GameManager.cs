@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         _owlbert.GetComponent<OwlbertController>().Restart();
         _cameraController.ChangeFocus(_owlbert);
         Invoke("PlayerStartAudio", 0.5f);
+        Invoke("SwipeInstructions", 5);
     }
 
     private void PlayerStartAudio()
@@ -136,5 +137,11 @@ public class GameManager : MonoBehaviour
     private void ReturnToMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void SwipeInstructions()
+    {
+        parents[0].Call(0.5f, TalkBubbleTypes.SWIPE);
+        parents[1].Call(0.5f, TalkBubbleTypes.SWIPE);
     }
 }

@@ -146,9 +146,15 @@ public class BearController : MovementController
                 //talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
             case TalkBubbleTypes.HAPPY:
-                MakeNoise(true);
+                MakeNoise(false);
 
                 talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/HappyTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
+                break;
+            case TalkBubbleTypes.SWIPE:
+                MakeNoise(false);
+
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/SwipeTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
                 talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
             default:
