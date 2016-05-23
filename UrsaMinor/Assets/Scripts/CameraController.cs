@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
                  _fadingOut;
 
 	private float minPosition = -10f;
-	private float maxPosition = 89f;
+	private float maxPosition = 100f;
     private SpriteRenderer _fadeMask;
 	private Transform cameraTransform;
     private GameObject _target;
