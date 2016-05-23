@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         {
             _mamaCalls = value;
 
-            if(_mamaCalls > 2 && _papaCalls > 2)
+            if(_mamaCalls == 2 && _papaCalls == 2)
             {
                 parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
                 parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         {
             _papaCalls = value;
 
-            if (_mamaCalls > 2 && _papaCalls > 2)
+            if (_mamaCalls == 2 && _papaCalls == 2)
             {
                 parents[0].Call(0.5f, TalkBubbleTypes.HAPPY);
                 parents[1].Call(0.5f, TalkBubbleTypes.HAPPY);
