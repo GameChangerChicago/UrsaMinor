@@ -14,8 +14,8 @@ public class NPCController : BearController
             if (value != _currentState)
             {
                 _lastState = _currentState;
-                
-                switch(value)
+
+                switch (value)
                 {
                     case NPCStates.IDLE:
                         break;
@@ -39,15 +39,17 @@ public class NPCController : BearController
 
     public GameObject EdgeChecker;
     public GameObject ParentReaction;
-    public bool IsParent;
+    public bool IsParent,
+                IsFriend;
     private float _currentDuration;
-    private bool _movingRight = true;
+    private bool _movingRight = true,
+                 _minorJumping;
 
     protected override void Start()
     {
         base.Start();
 
-        if (IsParent)
+        if (IsParent || IsFriend)
             currentState = NPCStates.IDLE;
     }
 
@@ -56,44 +58,39 @@ public class NPCController : BearController
         base.Update();
 
         NPCBehavior();
-        
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            Call(0.5f, TalkBubbleTypes.ANGRY);
-        }
     }
 
     private void NPCBehavior()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case NPCStates.IDLE:
-                
+
                 break;
             case NPCStates.PATROL:
-                if(_movingRight)
+                if (_movingRight)
                 {
                     MoveRight(MoveSpeed);
                 }
                 else
                 {
-                    MoveLeft(MoveSpeed);   
+                    MoveLeft(MoveSpeed);
                 }
 
                 Collider2D obstacle = Physics2D.OverlapCircle(new Vector2(EdgeChecker.transform.position.x, EdgeChecker.transform.position.y), 0.1f);
                 if (obstacle)
                 {
-                    if(obstacle.tag == "Ground")
+                    if (obstacle.tag == "Ground")
                     {
                         _movingRight = !_movingRight;
                     }
                 }
                 break;
             case NPCStates.CALL:
-                
+
                 break;
             case NPCStates.RUNAWAY:
-                Debug.Log("Retreat!");
+                MoveRight(MoveSpeed);
                 break;
             case NPCStates.SWIPE:
                 break;
@@ -140,6 +137,15 @@ public class NPCController : BearController
         else
         {
             currentState = NPCStates.PATROL;
+        }
+    }
+
+    //Start here tomorrow
+    private void Jump()
+    {
+        if (_minorJumping)
+        {
+            Invoke("Jump", 1);
         }
     }
 
