@@ -14,8 +14,8 @@ public class CameraController : MonoBehaviour
                  _fadingIn,
                  _fadingOut;
 
-	private float minPosition = -10f;
-	private float maxPosition = 100f;
+    public float MinPosition;
+    public float MaxPosition;
     private SpriteRenderer _fadeMask;
 	private Transform cameraTransform;
     private GameObject _target;
@@ -41,14 +41,14 @@ public class CameraController : MonoBehaviour
             _changingFocus = false;
         }
 
-        if (_mainCamera.transform.position.x > maxPosition)
+        if (_mainCamera.transform.position.x > MaxPosition)
         {
-            _mainCamera.transform.position = new Vector3(maxPosition, _mainCamera.transform.position.y, _mainCamera.transform.position.z);
+            _mainCamera.transform.position = new Vector3(MaxPosition, _mainCamera.transform.position.y, _mainCamera.transform.position.z);
         }
 
-        if (_mainCamera.transform.position.x < minPosition)
+        if (_mainCamera.transform.position.x < MinPosition)
         {
-            _mainCamera.transform.position = new Vector3(minPosition, _mainCamera.transform.position.y, _mainCamera.transform.position.z);
+            _mainCamera.transform.position = new Vector3(MinPosition, _mainCamera.transform.position.y, _mainCamera.transform.position.z);
         }
 
         if(_fadingIn || _fadingOut)
@@ -128,7 +128,7 @@ public class CameraController : MonoBehaviour
         else
         {
             _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, 0);
-            this.transform.Translate(new Vector3(0, (_target.transform.position.y - this.transform.position.y) * 1f * Time.deltaTime, 0));
+            this.transform.Translate(new Vector3(0, (_target.transform.position.y - this.transform.position.y) * 0.75f * Time.deltaTime, 0));
         }
     }
 }
