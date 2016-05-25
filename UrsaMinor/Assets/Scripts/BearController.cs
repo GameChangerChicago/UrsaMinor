@@ -157,6 +157,12 @@ public class BearController : MovementController
                 talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/SwipeTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
                 talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
                 break;
+            case TalkBubbleTypes.SURPRPISE:
+                MakeNoise(false);
+
+                talkBubbleObject = (GameObject)Instantiate(Resources.Load<GameObject>("Prefabs/SurpriseTalkBubble"), TalkBubblePoint.transform.position, Quaternion.identity);
+                talkBubbleObject.transform.localScale = new Vector3(-this.transform.localScale.x, 1, 1);
+                break;
             default:
                 Debug.LogWarning("That talk bubble type either doesn't exist or hasn't been set up yet.");
                 break;

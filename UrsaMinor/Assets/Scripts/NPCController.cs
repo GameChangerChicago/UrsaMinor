@@ -41,6 +41,7 @@ public class NPCController : BearController
     public GameObject ParentReaction;
     public bool IsParent,
                 IsFriend;
+    private UrsaController _ursa;
     private float _currentDuration;
     private bool _movingRight = true,
                  _minorJumping;
@@ -49,8 +50,15 @@ public class NPCController : BearController
     {
         base.Start();
 
+        _ursa = FindObjectOfType<UrsaController>();
+
         if (IsParent || IsFriend)
             currentState = NPCStates.IDLE;
+
+        if (IsFriend)
+        {
+            facingRight = false;
+        }
     }
 
     protected override void Update()
@@ -91,6 +99,8 @@ public class NPCController : BearController
                 break;
             case NPCStates.RUNAWAY:
                 MoveRight(MoveSpeed);
+                Invoke("Jump", 0.5f);
+                Invoke("EndGame", 1f);
                 break;
             case NPCStates.SWIPE:
                 break;
@@ -108,6 +118,11 @@ public class NPCController : BearController
             myAnimator.SetBool("angryCalling", true);
         else
             myAnimator.SetBool("calling", true);
+
+        if (IsFriend && currentType == TalkBubbleTypes.SURPRPISE)
+        {
+            _ursa.InputActive = false;
+        }
 
         _currentDuration = duration;
         currentState = NPCStates.CALL;
@@ -134,6 +149,10 @@ public class NPCController : BearController
         {
             currentState = NPCStates.IDLE;
         }
+        else if (IsFriend)
+        {
+            currentState = NPCStates.RUNAWAY;
+        }
         else
         {
             currentState = NPCStates.PATROL;
@@ -143,10 +162,7 @@ public class NPCController : BearController
     //Start here tomorrow
     private void Jump()
     {
-        if (_minorJumping)
-        {
-            Invoke("Jump", 1);
-        }
+        jumpInitiated = true;
     }
 
     public void EnemySpotted()
@@ -157,5 +173,10 @@ public class NPCController : BearController
     public void DisableParentRaction()
     {
         ParentReaction.GetComponent<Collider2D>().enabled = false;
+    }
+
+    private void EndGame()
+    {
+        //Load credits
     }
 }

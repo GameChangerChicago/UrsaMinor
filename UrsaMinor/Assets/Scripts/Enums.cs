@@ -7,7 +7,8 @@ public enum TalkBubbleTypes
     RIGHTARROW,
     ANGRY,
     HAPPY,
-    SWIPE
+    SWIPE,
+    SURPRPISE
 }
 
 public enum NPCStates
