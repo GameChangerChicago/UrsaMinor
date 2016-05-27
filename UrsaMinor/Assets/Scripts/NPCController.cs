@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class NPCController : BearController
@@ -180,6 +181,6 @@ public class NPCController : BearController
 
     private void EndGame()
     {
-        //Load credits
+        SceneManager.LoadScene("Credits");
     }
 }
