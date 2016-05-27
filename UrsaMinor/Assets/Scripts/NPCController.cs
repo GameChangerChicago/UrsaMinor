@@ -99,8 +99,11 @@ public class NPCController : BearController
                 break;
             case NPCStates.RUNAWAY:
                 MoveRight(MoveSpeed);
-                Invoke("Jump", 0.5f);
+                Invoke("StartJump", 0.5f);
                 Invoke("EndGame", 1f);
+
+                if (jumpInitiated)
+                    Jump();
                 break;
             case NPCStates.SWIPE:
                 break;
@@ -160,7 +163,7 @@ public class NPCController : BearController
     }
 
     //Start here tomorrow
-    private void Jump()
+    private void StartJump()
     {
         jumpInitiated = true;
     }
