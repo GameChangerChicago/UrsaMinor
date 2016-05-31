@@ -181,6 +181,12 @@ public class NPCController : BearController
 
     private void EndGame()
     {
+        FindObjectOfType<CameraController>().FadeOut();
+        Invoke("LoadCredits", 1);
+    }
+
+    private void LoadCredits()
+    {
         SceneManager.LoadScene("Credits");
     }
 }
