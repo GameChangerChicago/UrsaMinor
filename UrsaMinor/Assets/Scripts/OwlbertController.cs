@@ -84,8 +84,6 @@ public class OwlbertController : MovementController
             FindObjectOfType<CameraController>().ChangeFocus(this.gameObject);
         }
 
-
-
         myAnimator.SetFloat("yVelocity", myRigidbody.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.R))
