@@ -14,6 +14,7 @@ public class OwlbertController : MovementController
     public List<TravelNode> TravelNodes;
     public Transform StartPoint;
 
+    private GameManager _theGameManager;
     private Vector2 _currentTarget;
     private int _currentNodeIndex;
     protected bool movingUp
@@ -70,6 +71,7 @@ public class OwlbertController : MovementController
     {
         base.Start();
 
+        _theGameManager = FindObjectOfType<GameManager>();
         _currentTarget = TravelNodes[0].transform.position;
     }
 
@@ -160,9 +162,17 @@ public class OwlbertController : MovementController
     {
         if (col.name == "SwipHitBox")
         {
+            _theGameManager.PapaPointsText.rectTransform.position = Camera.main.WorldToScreenPoint(new Vector2(col.transform.position.x + 1, col.transform.position.y));
+            _theGameManager.PapaPointsText.text = "+30";
+            Invoke("ResetText", 1);
             myGameManager.TheAuidoManager.PlaySFX(AudioLoader.instance.OwlbertHit);
             currentState = OwlbertStates.DEATH;
         }
+    }
+
+    private void ResetText()
+    {
+        _theGameManager.PapaPointsText.text = ""; 
     }
 
     public void Restart()

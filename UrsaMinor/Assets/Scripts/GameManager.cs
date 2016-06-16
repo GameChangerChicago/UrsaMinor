@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -65,6 +66,9 @@ public class GameManager : MonoBehaviour
     private int _owlbertLives = 2;
 
     private CameraController _cameraController;
+    public Text MamaPointsText,
+                PapaPointsText,
+                OwlbertPointsText;
 
     void Start()
     {
@@ -108,9 +112,28 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
-            PlayerStart();
+            //PlayerStart();
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level1")
+            TextManager();
+    }
+
+    private void TextManager()
+    {
+        if (MamaPointsText.text != "")
+        {
+            MamaPointsText.transform.position = new Vector2(MamaPointsText.transform.position.x, MamaPointsText.transform.position.y + 100 * Time.deltaTime);
+        }
+        if (PapaPointsText.text != "")
+        {
+            PapaPointsText.transform.position = new Vector2(PapaPointsText.transform.position.x, PapaPointsText.transform.position.y + 100 * Time.deltaTime);
+        }
+        if (OwlbertPointsText.text != "")
+        {
+            OwlbertPointsText.transform.position = new Vector2(OwlbertPointsText.transform.position.x, OwlbertPointsText.transform.position.y + 100 * Time.deltaTime);
         }
     }
 

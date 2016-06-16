@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CallReaction : CharacterReaction
@@ -21,11 +22,25 @@ public class CallReaction : CharacterReaction
             if(this.name == "PapaCallReaction")
             {
                 _theGameManager.PapaCalls++;
+                _theGameManager.PapaPointsText.rectTransform.position = Camera.main.WorldToScreenPoint(new Vector2(col.transform.position.x + 1, col.transform.position.y));
+                _theGameManager.PapaPointsText.text = "+10";
+                StartCoroutine("ResetText", _theGameManager.PapaPointsText);
             }
             if(this.name == "MamaCallReaction")
             {
                 _theGameManager.MamaCalls++;
+                _theGameManager.MamaPointsText.rectTransform.position = Camera.main.WorldToScreenPoint(new Vector2(col.transform.position.x + 1, col.transform.position.y));
+                _theGameManager.MamaPointsText.text = "+10";
+                StartCoroutine("ResetText", _theGameManager.MamaPointsText);
             }
         }
     }
+
+    private IEnumerator ResetText(Text resetText)
+    {
+        yield return new WaitForSeconds(1);
+
+        resetText.text = "";
+    }
+
 }
