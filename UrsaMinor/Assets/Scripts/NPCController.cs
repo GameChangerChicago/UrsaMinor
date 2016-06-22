@@ -46,6 +46,7 @@ public class NPCController : BearController
     private float _currentDuration;
     private bool _movingRight = true,
                  _minorJumping;
+                 //Possibly something to limit the angry reaction. Seems a little exessive right now.
 
     protected override void Start()
     {

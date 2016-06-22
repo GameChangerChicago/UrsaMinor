@@ -17,6 +17,8 @@ public class OwlbertController : MovementController
     private GameManager _theGameManager;
     private Vector2 _currentTarget;
     private int _currentNodeIndex;
+    private bool _active;
+
     protected bool movingUp
     {
         get
@@ -50,9 +52,11 @@ public class OwlbertController : MovementController
                         myAnimator.SetBool("moving", false);
                         break;
                     case OwlbertStates.FOLLOWROUTE:
+                        _active = true;
                         myAnimator.SetBool("moving", true);
                         break;
                     case OwlbertStates.DEATH:
+                        _active = false;
                         myAnimator.SetBool("dead", true);
                         break;
                     default:
@@ -91,6 +95,11 @@ public class OwlbertController : MovementController
         if (Input.GetKeyDown(KeyCode.R))
         {
             SetNextTarget();
+        }
+
+        if(_active)
+        {
+            OwlbertVisibilityManager();
         }
     }
 
@@ -187,6 +196,7 @@ public class OwlbertController : MovementController
     private void StartMoving()
     {
         currentState = OwlbertStates.FOLLOWROUTE;
+
     }
 
     public void Death()
@@ -202,5 +212,27 @@ public class OwlbertController : MovementController
         {
             myGameManager.GameOver();
         }
+    }
+
+    private void OwlbertVisibilityManager()
+    {
+        Vector2 convertedRectXY = Camera.main.ScreenToWorldPoint(new Vector2(Camera.main.pixelRect.x, Camera.main.pixelRect.y)),
+                convertedRectWH = Camera.main.ScreenToWorldPoint(new Vector2(Camera.main.pixelRect.width, Camera.main.pixelRect.height));
+
+        Rect camRect = new Rect(convertedRectXY.x, convertedRectXY.y, convertedRectWH.x, convertedRectWH.y);
+
+        if ((this.transform.position.x > camRect.width) && (this.transform.position.y > camRect.height))
+        {
+            Invoke("OffScreenReset", 3);
+        }
+        else
+        {
+            CancelInvoke("OffScreenReset");
+        }
+    }
+
+    private void OffScreenReset()
+    {
+        _theGameManager.PlayerStart();
     }
 }
