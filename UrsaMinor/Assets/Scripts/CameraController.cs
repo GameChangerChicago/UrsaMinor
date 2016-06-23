@@ -36,9 +36,10 @@ public class CameraController : MonoBehaviour
         {
             Follow();
         }
-        else if(Vector2.Distance(_target.transform.position, this.transform.position) < 2)
+        else if(Vector2.Distance(_target.transform.position, this.transform.position) < 0.5f)
         {
             _changingFocus = false;
+            Ursa.GetComponent<UrsaController>().InputActive = true;
         }
 
         if (_mainCamera.transform.position.x > MaxPosition)
@@ -92,6 +93,7 @@ public class CameraController : MonoBehaviour
         iTween.MoveTo(this.gameObject, new Vector3(target.transform.position.x, target.transform.position.y, this.transform.position.z), 0.5f);
         _changingFocus = true;
         _target = target;
+        Ursa.GetComponent<UrsaController>().InputActive = false;
         _targetRigidbody = _target.GetComponent<Rigidbody2D>();
         Invoke("ChangeBack", 4);
 	}
@@ -101,13 +103,9 @@ public class CameraController : MonoBehaviour
         iTween.MoveTo(this.gameObject, new Vector3(Ursa.transform.position.x, Ursa.transform.position.y, this.transform.position.z), 1);
         _changingFocus = true;
         _target = Ursa;
+        Ursa.GetComponent<UrsaController>().InputActive = false;
         _targetRigidbody = _target.GetComponent<Rigidbody2D>();
     }
-
-    //private void MoveToNewTarget()
-    //{
-    //    iTween.MoveTo(this.gameObject, )
-    //}
 
     private void Follow()
     {
