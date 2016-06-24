@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         {
             Follow();
         }
-        else if(Vector2.Distance(_target.transform.position, this.transform.position) < 0.5f)
+        else if(Vector2.Distance(_target.transform.position, this.transform.position) < 0.25f)
         {
             _changingFocus = false;
             Ursa.GetComponent<UrsaController>().InputActive = true;
