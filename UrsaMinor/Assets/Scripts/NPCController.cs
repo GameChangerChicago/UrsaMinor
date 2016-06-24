@@ -102,6 +102,7 @@ public class NPCController : BearController
             case NPCStates.RUNAWAY:
                 MoveRight(MoveSpeed);
                 Invoke("StartJump", 0.5f);
+                Invoke("EndJump", 1.5f);
                 Invoke("EndGame", 1f);
 
                 if (jumpInitiated)
@@ -168,6 +169,10 @@ public class NPCController : BearController
     private void StartJump()
     {
         jumpInitiated = true;
+    }
+    private void EndJump()
+    {
+        jumpInitiated = false;
     }
 
     public void EnemySpotted()
